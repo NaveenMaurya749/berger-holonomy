@@ -1,17 +1,25 @@
 \documentclass{beamer}
 \usepackage[T1]{fontenc}
+\usepackage{biblatex}
 \usetheme{Madrid}
 \usefonttheme[onlymath]{serif}
+
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\setbeamertemplate{theorems}[ams style]
+\setbeamertemplate{theorema}[numbered]
 
 % other packages
 \usepackage{latexsym,amsmath,xcolor,multicol,booktabs}
 \usepackage{graphicx,pstricks,listings,stackengine}
 
+\addbibresource{references.bib}
+
 \author{Naveen Maurya}
-\title[Berger's Holonomy Classification]{Berger's Classification of Riemannian Holonomies}
+\title[Berger's Holonomy Classification]{Berger's Classification Theorem on Riemannian Holonomies}
 \subtitle{MA 333 Final Presentation}
 \institute[IISc]{Indian Institute of Science}
-\date{2025 Dec 08/09}
+\date{2025 Dec 09}
 
 % defs
 \def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
@@ -45,8 +53,17 @@
   \end{frame}
 }
 
-\newcommand*{\Hol}{\text{Hol}}
-\newcommand*{\End}{\text{End}}
+\setbeamercolor{headerCol}{fg=black,bg=lightgray}
+\setbeamercolor{bodyCol}{fg=white,bg=gray}
+
+\newcommand*{\Hol}{\m{Hol}}
+\newcommand*{\hol}{\mathfrak{hol}}
+\newcommand*{\End}{\m{End}}
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\Sph}{\mathbb{S}}
+\newcommand*{\Spin}{\m{Spin}}
+\newcommand*{\GL}{\m{GL}}
+\newcommand*{\m}{\mathrm}
 
 \begin{document}
 
@@ -54,88 +71,310 @@
     \titlepage
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Contents}
     \tableofcontents[sectionstyle=show,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 \section{Introduction}
 
-\begin{frame}{Holonomy}
-    \begin{itemize}[<+-| alert@+>] 
-        \item We define the holonomy group $\Hol(M, g)$ of the Levi-Civita connection
-        on a Riemannain manifold $(M, g)$ as the group of parallel transport endomorphisms
-        $P_\gamma$ for loops $\gamma$ based on a fixed endpoint $a_0$.
-        \[
-            P_\gamma \in \End(TM)
-        \]
-        \item fadsf
-        \item
+\begin{frame}{Statement of Berger's Classification}
+    \pause
+    Let $(M, g)$ be a simply-connected, irreducible, nonsymmetric Riemannian Manifold of dim $m$, then the
+    holonomy group $\Hol(p)$ of $M$ is exactly one of the following:
+    \pause
+
+    \begin{itemize}
+        \item $m = n,\;\;\; \Hol(p) = \m{SO}(n)$
+        \item $m = 2n, \;\Hol(p) = \m{U}(n)$
+        \item $m = 2n, \;\Hol(p) = \m{SU}(n)$
+        \item $m = 4n, \;\Hol(p) = \m{Sp}(n)$
+        \item $m = 4n, \;\Hol(p) = \m{Sp}(n)\m{Sp}(1)$
+        \item $m = 7,\;\;\; \Hol(p) = \m{G}_2$
+        \item $m = 8,\;\;\; \Hol(p) = \Spin(7)$
     \end{itemize}
 \end{frame}
 
+\section{Preliminary Facts and Nomenclature}
+
+\begin{frame}{Lie Group Representations}
+    $G$ be a compact Lie subgroup of $\m{SO}(n)$.
+    Then $G$ has a natural representation/action on $\R^n$.
+    The stabilizer of $v \in \R^n$ is called the \textit{isotropy subgroup} of
+    $v$, $G_v$.\\
+    \pause
+
+    Now let $v \in \R^n$, and let $G.v$ be the orbit of $v$ under $G$.
+    Then there is an induced representation of $G_v$ 
+    on the normal space $\nu_v(G.v)$, called the \textit{slice representation}. \\
+    \pause
+
+    If the slice representation is trivial, we say that $v$ is a \textit{principal vector}.
+    The set of principal vectors is open and dense in $\R^n$.
+\end{frame}
 
 \section{Reducible Spaces}
 
-\begin{frame}
-    \begin{itemize}
-        \item asffa
-        \item asffa
-        \item asffa
-        \item asffa
-    \end{itemize}
+\begin{frame}{Reducible Spaces}
+    \only<1-3>
+    {\pause
+    A \textit{reducible} space is one which can be split as a nontrivial Riemannian product. \\
+    An \textit{irreducible} space is one which cannot be written as a Riemannian product. \\
+    \pause
+    Note, Holonomy representation of $M_1 \times M_2$ is $\Hol(M_1) \times \Hol(M_2)$.
+    The converse is also true, but locally!\\
+    The global converse is achived if we have completeness.
+    }
+    \only<4>{
+    \begin{theorem}[de Rham Decomposition]
+        Let $(M, g)$ be simply-connected and complete. Then there is a unique decomposition
+        upto isometry and permutations
+        \[
+            (M,g) = \prod_{i=1}^{k}(M_i, g_i)
+        \]
+        where $(M_i, g_i)$ are complete, simply-connected and irreducible.
+    \end{theorem}
+    Proof is via distributions.
+    }
 \end{frame}
 
 \section{Symmetric Spaces}
 
-\subsection{asdfdsf}
-
-\begin{frame}{asdfsf}
-    \begin{itemize}
-        \item adfdsfa
-        \item adfdsfa
-        \item adfdsfa
-        \item adfdsfa
-    \end{itemize}
+\begin{frame}{Symmetric Spaces}
+    \pause
+    \begin{definition}
+    A Riemannian space $(M,g)$ is said to be \textit{locally symmetric} if for each $x \in M$,
+    there exist isometries $s_x$ defined on some neighbourhood of $x$ such that:
+        \[
+            s_x(x) = x, \text{ and } s_{x*} = -\m{id}
+        \]
+    \end{definition}
+    \pause
+    If these $s_x$ are defined on all of $M$, then $M$ is said to be a
+    \textit{globally symmetric}.\\
 \end{frame}
 
-\begin{frame}{Normal Holonomy Theorem}
-    \begin{itemize}
-        \item asdffds
-        \item asdffds
-        \item asdffds
-        \item asdffds
-    \end{itemize}
+\begin{frame}
+    We have the following result:
+    \pause
+    \begin{theorem}
+        Let $(M,g)$ be a Riemannian symmetric space. Then
+        \begin{enumerate}
+            \item [(i)] $\nabla R = 0$
+            \item [(ii)] $M$ is complete.
+            \item [(iii)] Involutive isometries $s_x$ are transitive on $M$.
+        \end{enumerate}
+    \end{theorem}
+    \only<2>{
+        Note, (i) follows because
+        \begin{align*}
+            \nabla R &= s_{x}^* (\nabla R)\\
+            (\nabla R)(X, Y, Z, W) &= s_{x*}(\nabla R) (X, Y,Z,W) \\
+            &= s_{x*} (\nabla_{s_{x*}X}R) (s_{x*} Y, s_{x*} Z, s_{x*} W) \\
+            &= (-1)^5 \nabla R(X,Y,Z,W)
+        \end{align*}
+    }
+    \only<3>{
+        Suppose $x, y \in M, X \in T_pM$ st $y = \exp_x(\epsilon X)$
+        be joined by a geodesic $\gamma$ on $[0, \epsilon]$.
+        Then consider the extension of $\gamma$ to a larger domain,
+        \begin{align*}
+            \tilde{\gamma}(t) := \begin{cases}
+                \exp_x (\epsilon X) & t \in [0, \epsilon] \\
+                s_y(\exp_x((t-\epsilon)X)) & t \in [\epsilon, 2\epsilon]
+            \end{cases}
+        \end{align*}
+        This shows $M$ is complete.
+    }
+    \only<4>
+    {
+        Now, suppose $\gamma$ is a geodesic from $x$ to $y$ with $\gamma(2T) = y$.
+        (which exists since M is complete) Then note $s_{\gamma(T)}$ is an isometry
+        taking $x$ to $y$. This show the involutive isometries are transitive on $M$.
+    }
 \end{frame}
-\subsection{asdfsf2}
 
-\begin{frame}{afd}
-    \begin{itemize}
-        \item asdf
-    \end{itemize}
+\begin{frame}{s-Representations}
+    \pause
+    The final result on symmetric spaces implies $M = G/H$, where 
+    $G = \m{Isom}^0(M)$, and $H$ be the isotropy subgroup of a 
+    point $o \in M$.
+
+    This follows from the Orbit-Stabilizer Theorem.
+
+    \pause
+    \begin{definition}
+        The isotropy representation of a semisimple simply-connected symmetric space is called an
+        \textit{s-Representation}.
+    \end{definition}
+    A semisimple symmetric space is $M = G/H$ as before such that $G$ is semisimple.
+    
+\end{frame}
+
+\begin{frame}{Holonomy and Curvature}
+    \pause
+    \textit{Ambrose-Singer Theorem} connects the holonomy of a connection 
+    with its curvature.
+    \pause
+    \begin{theorem}[Ambrose-Singer]
+        Let $\nabla$ be a connection on $(M,g)$. Then
+        \[\hol_p(\nabla) = \m{span}_\R\{P^{-1}_\gamma (F_\nabla \cdot v \land w)_x P_\gamma : \gamma \text{ from $p$ to $x$}\}\]
+    \end{theorem}
+    \pause
+    For Levi-Civita connection,
+    \[
+        \hol(p) = \m{span}_\R\{P^{-1}_\gamma R_x(X,Y) P_\gamma : \gamma \text{ from $p$ to $x$}\}
+    \]
+    \pause
+    And for symmetric spaces,
+    \[
+        \hol(p) = \m{span}_\R \{R_p(X,Y) : X,Y \in T_p M\}
+    \]
+    because $\nabla R = 0$.
 \end{frame}
 
 \section{Berger's Holonomy Theorem}
-\begin{frame}
-    \begin{itemize}
-        \item s
-    \end{itemize}
+
+\begin{frame}{Some Results}
+    \begin{theorem}
+        Let $G$ be a compact subgroup of $\m{SO}(n)$ acting on $\R^n$, not transitive on the sphere
+        and $v \in \R^n$ be a principal vector. Then $\R^n$ is spanned by the family
+        of tangent spaces $\nu_\gamma(t)(G.\gamma(t))$ for some $\xi \in \nu_v(G.v)$,
+        $\gamma(t) = v + t \xi, t \in \R$.
+    \end{theorem}
 \end{frame}
 
-\section{Some Special Holonomies}
+\begin{frame}{Some More Results}
+    \begin{theorem}
+        If $G$, a subgroup of $\m{SO}(n)$ acts on $\R^n$ as an \textit{s-representation},
+        then the connected component of the normalizer of $G$ in $\m{SO}(n)$, $N_o(G) = G$.
+    \end{theorem}
+    This is a standard result which 
+\end{frame}
 
-\begin{frame}{Kähler manifolds $(\Hol^0 U(n))$}
+\begin{frame}{Normal Holonomy Theorem}
+    We have the following result
+    \pause
+    \begin{theorem}[Normal Holonomy Theorem]
+        Let $M$ be a submanifold of $\R^n$ with $p \in M$.
+        Then $\Hol_0^\perp(p)$ acts as an \textit{s-representation}
+        on $\nu_p M$, i.e. there exist decompositions
+        \begin{align*}
+            \nu_p M = V_0 \oplus V_1 \oplus \cdots \oplus V_k, \\
+            \Hol_0^\perp(p) = G_1 \times \ldots \times G_k
+        \end{align*}
+        such that $G_i$ acts on $V_i$ irreducibly as an isotropy representation
+        of a simple symmetric space and trivially on all other $V_j$.
+    \end{theorem}
+\end{frame}
+
+\begin{frame}{The Glueing Lemma}\label{thm:glue}
+    The following lemma will be useful: \\
+    First for any $v \in T_pM$, define $\mathcal{F}_v$ to be the family of subspaces 
+    of $T_p M$ all containing $v$, which under the exponential map within injectivity radii form totally geodesic, locally symmetric manifolds.
+    \begin{lemma}
+        Let $M$ be a Riemannian manifold. Assume that for any given
+        $v$ in some dense subset of the Eucliean ball of injectivity radius at $p$,
+        the family $\mathcal{F}_v$ spans $T_pM$. Then the involution $s_p$ is an isometry of the ball.
+    \end{lemma}
+    That is, glueing together locally symmetric spaces gives locally symmetric spaces.
     
 \end{frame}
 
-\begin{frame}{Calabi-Yau manifolds (SU(n))}
+\begin{frame}{}
+    \begin{theorem}\label{thm:maj}
+        Let $M$ be a Riemannian manifold, $p \in M$ and let $\rho$ be the 
+        injectivity radius at $p$. Assume $\Phi = \Hol(p)$ acts irreducibly over
+        $T_p M$. Denote $N^v$ = $\exp_p(\nu_v(\Phi.v) \cap B_\rho^E(0))$.
+        Then for all $v \in T_p M, v \neq 0$,
+        \begin{enumerate}
+            \item [(i)] $N^v$ is totally geodesic. And $N^v$ splits off the geodesic $\gamma_v$.
+            And $Hol_p(N^v) \subseteq \Phi^v$
+            \item [(ii)] $fd$
+            \item [(iii)] $N^v$ is locally symmetric.
+        \end{enumerate}
+    \end{theorem}
+\end{frame}
+
+\begin{frame}{Berger's Theorem (Finally!)}
+    \begin{theorem}
+        If the holonomy group of an irreducible Riemannian manifold $M$ is not transitive on the sphere.
+        Then $M$ is locally symmetric.
+    \end{theorem}
+    \pause
+    Let $p \in M$. The set of principal vectors of $T_p M$ is open and dense.
+    And $\Phi = \Hol(p)$ is not transitive on the sphere.\\
+    \pause
+    So earlier lemma gives $\gamma_\xi(t) = v + t\xi$ in $\nu_v(\Phi.v)$
+    with $\nu_{\gamma_\xi(t)}(\Phi.\gamma(t))$ spanning $T_p M$. \\
+    \pause
+    From Theorem~\ref{thm:maj}, and the Glueing Lemma~\ref{thm:glue}, we conclude
+    that $M$ is locally symmetric at $p$.
+\end{frame}
+
+\begin{frame}{Berger's List}
+    Since transitive actions have been classified completely
+    \pause
+    \begin{table}
+    \centering
+    \begin{tabular}{c c}
+        \hline
+        Group $G$ & Transitive Action on Sphere \\
+        \hline
+        $\m{SO}(n)$          & $\Sph^{n-1}$ \\
+        $\m{SU}(n)$          & $\Sph^{2n-1}$ \\
+        $\m{U}(n)$           & $\Sph^{2n-1}$ \\
+        $\m{Sp}(n)$          & $\Sph^{4n-1}$ \\
+        $\m{Sp}(n)\m{U}(1)$  & $\Sph^{4n-1}$ \\
+        $\m{Sp}(n)\m{Sp}(1)$ & $\Sph^{4n-1}$ \\
+        $\G_{2}$             & $\Sph^{6}$ \\
+        $\m{Spin}(7)$        & $\Sph^{7}$ \\
+        $\m{Spin}(9)$        & $\Sph^{15}$ \\
+        \hline
+    \end{tabular}
+    \end{table}
+    Some of these cases were later shown to not required to be considered.
+    \pause
+    This gives the final trimmed list.
+\end{frame}
+
+\begin{frame}{Berger's List}
+    This finally leaves us with the Berger's list, but each of the classes correspond
+    to unique geometries.
+    \pause
+
+    Holonomy groups of all possible simply-connected irreducible nonsymmetric manifolds are
+    classified as follows:
+    \pause
+    \begin{table}
+    \centering
+    \begin{tabular}{| c | c | c |}
+        \hline
+        Holonomy Group & $\m{dim}(M)$ & Corresponding Geometry \\
+        \hline
+        $\m{SO}(n)$          & $m = n$  & Riemannian manifold \\
+        $\m{U}(n)$           & $m = 2n$ & Kähler manifold \\
+        $\m{SU}(n)$          & $m = 2n$ & Calabi-Yau manifold\\
+        $\m{Sp}(n)$          & $m = 4n$ & Hyperkähler manifold\\
+        $\m{Sp}(n)\m{Sp}(1)$ & $m = 4n$ & Quaternion-Kähler manifold\\
+        $\G_{2}$             & $m = 7$  & $G_{2}$ manifold\\
+        $\m{Spin}(7)$        & $m = 8$  & $\m{Spin}(7)$ manifold\\
+        \hline
+    \end{tabular}\end{table}
+\end{frame}
+
+\begin{frame}{References}
+    % This command prints the bibliography
+    \printbibliography
     
+    % Use \nocite{*} if you want to include ALL entries from the .bib file,
+    % even those you didn't cite with \cite{} in the main text.
+    \nocite{*}
 \end{frame}
 
 \begin{frame}
     \begin{center}
-        {\Huge Thanks!}
+        \Huge{Thanks!}
     \end{center}
 \end{frame}
 
 \end{document}
-
