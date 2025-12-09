@@ -110,6 +110,10 @@
 
     If the slice representation is trivial, we say that $v$ is a \textit{principal vector}.
     The set of principal vectors is open and dense in $\R^n$.
+    \pause
+
+    If $M$ is an embedded submanifold of $\R^n$, then then there is a derived
+    normal holonomy group $\Hol^\perp(\nabla^\perp)$ wrt the normal connection $\nabla^\perp$.
 \end{frame}
 
 \section{Reducible Spaces}
@@ -117,12 +121,12 @@
 \begin{frame}{Reducible Spaces}
     \only<1-3>
     {\pause
-    A \textit{reducible} space is one which can be split as a nontrivial Riemannian product. \\
+    $(M,g)$ is called a \textit{reducible} space if it is isometric to a nontrivial Riemannian product $(M_1, g_1) \times (M_2, g_2)$.\\
     An \textit{irreducible} space is one which cannot be written as a Riemannian product. \\
     \pause
-    Note, Holonomy representation of $M_1 \times M_2$ is $\Hol(M_1) \times \Hol(M_2)$.
+    Note, Holonomy representation of $(M_1,g_1) \times (M_2,g_2)$ is $\Hol(M_1,g_1) \times \Hol(M_2,g_2)$.
     The converse is also true, but locally!\\
-    The global converse is achived if we have completeness.
+    The global converse is achieved if we have completeness.
     }
     \only<4>{
     \begin{theorem}[de Rham Decomposition]
@@ -132,6 +136,9 @@
             (M,g) = \prod_{i=1}^{k}(M_i, g_i)
         \]
         where $(M_i, g_i)$ are complete, simply-connected and irreducible.
+
+        Moreover, the holonomy representation of $\Hol_p(M)$ over $T_pM$ is the 
+        product of the representations of $\Hol_{p_i}(M_i)$ over $T_{p_i} M_i$.
     \end{theorem}
     Proof is via distributions.
     }
@@ -150,12 +157,11 @@
     \end{definition}
     \pause
     If these $s_x$ are defined on all of $M$, then $M$ is said to be a
-    \textit{globally symmetric}.\\
+    \textit{globally symmetric}. \\
 \end{frame}
 
 \begin{frame}
     We have the following result:
-    \pause
     \begin{theorem}
         Let $(M,g)$ be a Riemannian symmetric space. Then
         \begin{enumerate}
@@ -164,6 +170,7 @@
             \item [(iii)] Involutive isometries $s_x$ are transitive on $M$.
         \end{enumerate}
     \end{theorem}
+    \pause
     \only<2>{
         Note, (i) follows because
         \begin{align*}
@@ -235,16 +242,16 @@
 \section{Berger's Holonomy Theorem}
 
 \begin{frame}{Some Results}
-    \begin{theorem}
+    \begin{lemma}\label{thm:span}
         Let $G$ be a compact subgroup of $\m{SO}(n)$ acting on $\R^n$, not transitive on the sphere
         and $v \in \R^n$ be a principal vector. Then $\R^n$ is spanned by the family
         of tangent spaces $\nu_\gamma(t)(G.\gamma(t))$ for some $\xi \in \nu_v(G.v)$,
         $\gamma(t) = v + t \xi, t \in \R$.
-    \end{theorem}
+    \end{lemma}
 \end{frame}
 
 \begin{frame}{Some More Results}
-    \begin{theorem}
+    \begin{theorem}\label{thm:s-rep}
         If $G$, a subgroup of $\m{SO}(n)$ acts on $\R^n$ as an \textit{s-representation},
         then the connected component of the normalizer of $G$ in $\m{SO}(n)$, $N_o(G) = G$.
     \end{theorem}
@@ -257,13 +264,38 @@
     \begin{theorem}[Normal Holonomy Theorem]
         Let $M$ be a submanifold of $\R^n$ with $p \in M$.
         Then $\Hol_0^\perp(p)$ acts as an \textit{s-representation}
-        on $\nu_p M$, i.e. there exist decompositions
+        on $\nu_p M$ (upto the subspace of fixed points), i.e. there exist decompositions
         \begin{align*}
             \nu_p M = V_0 \oplus V_1 \oplus \cdots \oplus V_k, \\
             \Hol_0^\perp(p) = G_1 \times \ldots \times G_k
         \end{align*}
         such that $G_i$ acts on $V_i$ irreducibly as an isotropy representation
         of a simple symmetric space and trivially on all other $V_j$.
+    \end{theorem}
+\end{frame}
+
+\begin{frame}{Full submanifolds}
+    \begin{definition}
+        A submanifold of $\R^n$ is called \textit{full} if it is not contained in any proper
+        affine subspace of $\R^n$.
+    \end{definition}
+    Note, an orbit $G.v$ is full iff $G$ acts irreducibly on $\R^n$.
+    \begin{theorem}
+        Let $G$ be an orthogonal group acting on $\R^n$ such that the orbit $G.v$ is full.
+        Then 
+    \end{theorem}
+\end{frame}
+
+\begin{frame}{Cartan's Theorem on Existence Totally Geodesic Manifolds}\label{thm:cartan}
+    Cartan gave a criterion for submanifolds of arbitrary Riemannian manifolds being totally geodesic.
+    \begin{theorem}[Existence of Totally Geodesic Manifolds]
+        Let $\tilde{M}$ be a Riemannian manifold, $p \in \tilde{M}$, and $V$ a
+        linear subspace of $T_p \tilde{M}$.
+        There exists a totally geodesic submanifold $M$ of $\tilde{M}$
+        with $p \in M$ and $T_p M = V$ if and only if there exists $\epsilon > 0$
+        s.t. for every geodesic $\gamma$ in $\tilde{M}$ with $\gamma(0) = p$, $\dot\gamma(0) \in V \cap B_\epsilon(0)$,
+        the Riemannian curvature tensor of $\tilde{M}$ preserves the parallel translate of $V$ along $\gamma$ from $p$
+        to $\gamma(1)$.
     \end{theorem}
 \end{frame}
 
@@ -287,7 +319,7 @@
         $T_p M$. Denote $N^v$ = $\exp_p(\nu_v(\Phi.v) \cap B_\rho^E(0))$.
         Then for all $v \in T_p M, v \neq 0$,
         \begin{enumerate}
-            \item [(i)] $N^v$ is totally geodesic. And $N^v$ splits off the geodesic $\gamma_v$.
+            \item [(i)] $N^v$ is totally geodesic. Further, $N^v$ splits off the geodesic $\gamma_v$.
             And $Hol_p(N^v) \subseteq \Phi^v$
             \item [(ii)] $fd$
             \item [(iii)] $N^v$ is locally symmetric.
@@ -326,7 +358,7 @@
         $\m{Sp}(n)$          & $\Sph^{4n-1}$ \\
         $\m{Sp}(n)\m{U}(1)$  & $\Sph^{4n-1}$ \\
         $\m{Sp}(n)\m{Sp}(1)$ & $\Sph^{4n-1}$ \\
-        $\G_{2}$             & $\Sph^{6}$ \\
+        $G_{2}$             & $\Sph^{6}$ \\
         $\m{Spin}(7)$        & $\Sph^{7}$ \\
         $\m{Spin}(9)$        & $\Sph^{15}$ \\
         \hline
@@ -356,7 +388,7 @@
         $\m{SU}(n)$          & $m = 2n$ & Calabi-Yau manifold\\
         $\m{Sp}(n)$          & $m = 4n$ & Hyperkähler manifold\\
         $\m{Sp}(n)\m{Sp}(1)$ & $m = 4n$ & Quaternion-Kähler manifold\\
-        $\G_{2}$             & $m = 7$  & $G_{2}$ manifold\\
+        $G_{2}$              & $m = 7$  & $G_{2}$ manifold\\
         $\m{Spin}(7)$        & $m = 8$  & $\m{Spin}(7)$ manifold\\
         \hline
     \end{tabular}\end{table}
