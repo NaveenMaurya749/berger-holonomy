@@ -140,7 +140,6 @@
         Moreover, the holonomy representation of $\Hol_p(M)$ over $T_pM$ is the 
         product of the representations of $\Hol_{p_i}(M_i)$ over $T_{p_i} M_i$.
     \end{theorem}
-    Proof is via distributions.
     }
 \end{frame}
 
@@ -248,6 +247,9 @@
         of tangent spaces $\nu_\gamma(t)(G.\gamma(t))$ for some $\xi \in \nu_v(G.v)$,
         $\gamma(t) = v + t \xi, t \in \R$.
     \end{lemma}
+    % Choose any $\xi \in \nu_v(G.v)$ not a multiple of $v$.
+    % Change $\xi$ slightly s.t. $\det A_\xi \neq 0$.
+    % Let $\gamma(t) = v + t \xi$, and $V = (\m{span}({\nu_{\gamma(t)}(G.\gamma(t))}))\perp$.
 \end{frame}
 
 \begin{frame}{Some More Results}
@@ -255,7 +257,7 @@
         If $G$, a subgroup of $\m{SO}(n)$ acts on $\R^n$ as an \textit{s-representation},
         then the connected component of the normalizer of $G$ in $\m{SO}(n)$, $N_o(G) = G$.
     \end{theorem}
-    This is a standard result which 
+    % This is a standard result which 
 \end{frame}
 
 \begin{frame}{Normal Holonomy Theorem}
@@ -280,14 +282,17 @@
         affine subspace of $\R^n$.
     \end{definition}
     Note, an orbit $G.v$ is full iff $G$ acts irreducibly on $\R^n$.
+    \pause
     \begin{theorem}
         Let $G$ be an orthogonal group acting on $\R^n$ such that the orbit $G.v$ is full.
-        Then 
+        Then the connected component of the slice representation $(G_v)_o$ is contained in
+        the normal holonomy group $\Hol^\perp_v(G.v)$.
     \end{theorem}
 \end{frame}
 
 \begin{frame}{Cartan's Theorem on Existence Totally Geodesic Manifolds}\label{thm:cartan}
     Cartan gave a criterion for submanifolds of arbitrary Riemannian manifolds being totally geodesic.
+    \pause
     \begin{theorem}[Existence of Totally Geodesic Manifolds]
         Let $\tilde{M}$ be a Riemannian manifold, $p \in \tilde{M}$, and $V$ a
         linear subspace of $T_p \tilde{M}$.
@@ -299,20 +304,32 @@
     \end{theorem}
 \end{frame}
 
+\begin{frame}{Another Lemma}
+    We will also use the following lemma eventually:
+    \begin{lemma}\label{thm:lem}
+        Let $M$ be a Riemannian manifold s.t. every holonomy transformation
+        of $T_p M$ extends via the expoenential map tio a local isometry.
+        Then $M$ is locally symmetric.
+    \end{lemma}
+\end{frame}
+
 \begin{frame}{The Glueing Lemma}\label{thm:glue}
     The following lemma will be useful: \\
     First for any $v \in T_pM$, define $\mathcal{F}_v$ to be the family of subspaces 
     of $T_p M$ all containing $v$, which under the exponential map within injectivity radii form totally geodesic, locally symmetric manifolds.
+    \pause
     \begin{lemma}
         Let $M$ be a Riemannian manifold. Assume that for any given
         $v$ in some dense subset of the Eucliean ball of injectivity radius at $p$,
         the family $\mathcal{F}_v$ spans $T_pM$. Then the involution $s_p$ is an isometry of the ball.
     \end{lemma}
-    That is, glueing together locally symmetric spaces gives locally symmetric spaces.
-    
+    \pause
+    That is, glueing together locally symmetric spaces gives locally symmetric spaces. \\
+    Proof follows by constructing a parallel frame in which Jacobi operator diagonalizes,
+    and then using density.
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Auxillary Theorem}
     \begin{theorem}\label{thm:maj}
         Let $M$ be a Riemannian manifold, $p \in M$ and let $\rho$ be the 
         injectivity radius at $p$. Assume $\Phi = \Hol(p)$ acts irreducibly over
@@ -320,11 +337,34 @@
         Then for all $v \in T_p M, v \neq 0$,
         \begin{enumerate}
             \item [(i)] $N^v$ is totally geodesic. Further, $N^v$ splits off the geodesic $\gamma_v$.
-            And $Hol_p(N^v) \subseteq \Phi^v$
-            \item [(ii)] $fd$
+            And $Hol_p(N^v) = \Phi^v \subseteq (\Phi_v)_o$.
+            \item [(ii)] The normal holonomy group $\Phi^\perp$ of $\Phi.v$ at $v$ 
+            acts by isometries on $N^v$. Moreover, $\Phi^\perp \supseteq \Phi^v$, holonomy group of $N^v$ at $p$.
             \item [(iii)] $N^v$ is locally symmetric.
         \end{enumerate}
     \end{theorem}
+\end{frame}
+
+\begin{frame}{Auxillary Theorem}
+    \begin{enumerate}
+        \item [(i)] The proof for totally geodesic follows from the Cartan's criterion for Existence of totally
+        geodesic submanifolds, after showing that the curavture endomorphisms
+        $R(\xi, \eta)$ belong to the isotropy algebra at $v$, and that the isotropy algebra
+        acts invariantly on the normal space $\nu_v(\Phi.v)$. That is, the normal space
+        is preserved by the curvature tensor.
+
+        \pause
+
+        \item [(iii)] Let $v \in T_p M$, and $c$ be a curve in $N^v$ from $p$ to $q$.
+        Then parallel transport maps $\Phi(p)$ to $\Phi(q)$. \\
+        \pause
+
+        So it maps $\Phi.v$ isometrically to $\Phi(q).(P_c(v))$. Then $T_q N^{P_c(v)} = T_qN^v$.
+        So $N^{P_c(v)}$ and $N^v$ coincide in a neigbourhood of $q$.
+        Thus holonomy transformations of $N^v$ extend to local isometries by the exponential map.
+        \pause
+        It follows from Lemma \ref{thm:lem}, that $N^v$ is locally symmetric.
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}{Berger's Theorem (Finally!)}
